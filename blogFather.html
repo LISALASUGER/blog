@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="欢迎来到我的个人博客，这里记录了我对生活、技术和热爱事物的思考和探索。">
+    <meta name="keywords" content="个人博客, 技术分享, 生活点滴, 学习笔记">
+    <meta name="author" content="您的名字">
+    <title>LISALA_Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+            display: flex;
+            min-height: 100vh;
+        }
+        body:not(.dark-theme) {
+            background-color: #ffffff;
+            color: #333333;
+        }
+        body.dark-theme {
+            background-color: #333333;
+            color: #ffffff;
+        }
+        .container {
+            width: 75%;
+            margin-left: 25%; /* 为左侧固定区域留出空间 */
+            padding: 20px;
+            box-sizing: border-box; /* 确保padding不会增加宽度 */
+        }
+        h1, h2, h3 {
+            color: #0066cc;
+        }
+        body.dark-theme h1, body.dark-theme h2, body.dark-theme h3 {
+            color: #66b3ff;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        body.dark-theme a {
+            color: #66b3ff;
+        }
+        .button-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .icon-button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .icon-button:hover {
+            background-color: #0055aa;
+            transform: scale(1.1);
+        }
+        body.dark-theme .icon-button {
+            background-color: #66b3ff;
+            color: #333333;
+        }
+        body.dark-theme .icon-button:hover {
+            background-color: #5599dd;
+        }
+        .icon-button i {
+            font-size: 20px;
+        }
+        .personal-info {
+            width: 25%;
+            background: rgba(0, 20, 40, 0.8);
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            color: #e0e0e0;
+            box-sizing: border-box; /* 确保padding不会增加宽度 */
+        }
+        .personal-info::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            right: 0;
+            bottom: 10%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.5), transparent);
+        }
+        .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            margin-bottom: 30px;
+        }
+        .info-text {
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 340px;
+        }
+        .info-text h2 {
+            color: #00ffff;
+            margin-bottom: 10px;
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
+        .info-text .title {
+            color: #e0e0e0;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .info-text .divider {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            margin: 0 auto 15px;
+        }
+        .info-text .description,
+        .info-text .mission,
+        .info-text .invitation {
+            color: #b0b0b0;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .info-text .invitation {
+            color: #00ffff;
+            font-weight: bold;
+        }
+        .navigation {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 200px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+        body.dark-theme .navigation {
+            background-color: rgba(51, 51, 51, 0.9);
+        }
+        .navigation a {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        body.dark-theme .navigation a {
+            color: #fff;
+        }
+        .navigation a.h1 {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .navigation a.h2 {
+            padding-left: 10px;
+            font-size: 14px;
+        }
+        .navigation a.h3 {
+            padding-left: 20px;
+            font-size: 12px;
+        }
+        .navigation a.active {
+            color: #0066cc;
+            font-weight: bold;
+        }
+        body.dark-theme .navigation a.active {
+            color: #66b3ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="personal-info">
+        <img src="1.jpg" alt="头像" class="avatar">
+        <div class="info-text">
+            <h2>LISALA</h2>
+            <p class="title">技术探索者 | 创新分享者</p>
+            <div class="divider"></div>
+            <p class="description">
+                专注发掘与分享AI、量子计算、区块链等前沿技术的突破与应用。
+            </p>
+            <p class="mission">
+                致力于将复杂技术转化为易懂内容，激发大众对创新科技的热情。
+            </p>
+            <p class="invitation">
+                邀您同行，共同探索改变世界的技术奇迹！
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>🌟 感谢您的访问 🌟</h1>
+        <h2>🤗 欢迎光临我的小天地 🤗</h2>
+        <p>感谢您在百忙之中抽出宝贵的时间，来到我的个人博客。这里记录了我对生活、技术、以及一切我所热爱的事物的思考和探索。</p>
+        <h3>📝 博客内容概览</h3>
+        <ul>
+            <li>
+                <p><strong>技术分享</strong><br>
+                在这里，我会分享一些编程技巧、技术心得，以及我在工作中遇到的挑战和解决方案。</p>
+            </li>
+            <li>
+                <p><strong>生活点滴</strong><br>
+                生活不仅仅是代码和逻辑，还有那些温暖的瞬间和不经意的美好。我会在这里记录下我的旅行故事、美食体验和日常感悟。</p>
+            </li>
+            <li>
+                <p><strong>学习笔记</strong><br>
+                学无止境，我会在这里整理我的学习笔记，包括但不限于编程语言、框架、工具的使用心得。</p>
+            </li>
+        </ul>
+        <h3>💬 互动交流</h3>
+        <p>我非常欢迎读者的反馈和建议，您可以通过以下方式与我取得联系：</p>
+        <ul>
+            <li>
+                <p><strong>邮件交流</strong><br>
+                您也可以通过邮箱[LISALAJIANG@proton.me]直接与我交流。</p>
+            </li>
+        </ul>
+        <h3>🌱 共同成长</h3>
+        <p>我希望这个博客不仅是我个人成长的见证，也能成为我们共同进步的平台。让我们在这里相遇，一起探索知识的海洋，享受学习的乐趣。</p>
+        <p>再次感谢您的到访，希望您在这里能找到有价值的内容，期待与您的每一次互动！</p>
+        <hr>
+        <p><strong>最后，如果您喜欢我的博客，请不吝赐教--2024-10-14</strong></p>
+    </div>
+
+    <div id="navigation" class="navigation">
+        <!-- 导航内容将由JavaScript动态生成 -->
+    </div>
+
+    <div class="button-container">
+        <button class="icon-button" id="homeButton" title="返回主页">
+            <i class="fas fa-home"></i>
+        </button>
+        <button class="icon-button" id="themeToggle" title="切换主题">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const homeButton = document.getElementById('homeButton');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function setTheme(theme) {
+            document.body.classList.toggle('dark-theme', theme === 'dark');
+            localStorage.setItem('theme', theme);
+            themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = localStorage.getItem('theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        homeButton.addEventListener('click', () => {
+            window.location.href = 'main.html'; // 假设主页是根目录
+        });
+
+        // 初始化主题
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDarkScheme.matches) {
+            setTheme('dark');
+        }
+
+        // 监听系统主题变化
+        prefersDarkScheme.addListener((e) => {
+            const newTheme = e.matches ? 'dark' : 'light';
+            setTheme(newTheme);
+        });
+
+        // 添加新的导航相关脚本
+        document.addEventListener('DOMContentLoaded', function() {
+            const navigation = document.getElementById('navigation');
+            const headings = document.querySelectorAll('h1, h2, h3');
+            const navItems = [];
+
+            headings.forEach((heading, index) => {
+                const link = document.createElement('a');
+                link.textContent = heading.textContent;
+                link.href = `#heading-${index}`;
+                link.classList.add(heading.tagName.toLowerCase());
+                
+                heading.id = `heading-${index}`;
+                
+                navigation.appendChild(link);
+                navItems.push({ element: link, target: heading });
+            });
+
+            function updateActiveNavItem() {
+                const scrollPosition = window.scrollY;
+
+                navItems.forEach(item => {
+                    const { element, target } = item;
+                    const targetPosition = target.getBoundingClientRect().top + scrollPosition;
+                    
+                    if (scrollPosition >= targetPosition - 100) {
+                        element.classList.add('active');
+                    } else {
+                        element.classList.remove('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveNavItem);
+            updateActiveNavItem();
+        });
+    </script>
+</body>
+</html>
