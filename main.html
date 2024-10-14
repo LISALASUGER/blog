@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>博客与个人信息</title>
+    <title>LISALA_Blog</title>
     <style>
         .info-text {
             text-align: center;
@@ -49,12 +49,11 @@
         }
         #video-background {
             position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             z-index: -1;
         }
         .main-container {
@@ -63,7 +62,7 @@
             background-color: rgba(0, 0, 0, 0.7);
         }
         .personal-info {
-            width: 50%;
+            width: 25%;
             background: rgba(0, 20, 40, 0.8);
             padding: 30px;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
@@ -76,14 +75,14 @@
         .personal-info::after {
             content: '';
             position: absolute;
-            top: 0;
+            top: 10%;
             right: 0;
-            bottom: 0;
+            bottom: 10%;
             width: 1px;
             background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.5), transparent);
         }
         .content-container {
-            width: 50%;
+            width: 75%;
             flex-grow: 0;
             display: flex;
             flex-direction: column;
@@ -140,6 +139,9 @@
             box-shadow: 0 0 30px rgba(0, 150, 255, 0.2);
         }
         .blog-item {
+            display: block;
+            text-decoration: none;
+            color: inherit;
             margin-bottom: 25px;
             padding: 25px;
             border: 1px solid rgba(0, 255, 255, 0.2);
@@ -189,7 +191,7 @@
 </head>
 <body>
     <video autoplay muted loop id="video-background">
-        <source src="c.mp4" type="video/mp4">
+        <source src="f.mp4" type="video/mp4">
     </video>
 
     <div class="main-container">
@@ -221,26 +223,16 @@
 
     <script>
         const blogPosts = [
-            { title: "Python深度学习框架对比", content: "探讨TensorFlow、PyTorch和Keras的优缺点及适用场景。" },
-            { title: "JavaScript异步编程技巧", content: "深入理解Promise、async/await和回调函数的使用方法。" },
-            { title: "Docker容器化应用实践", content: "如何使用Docker简化开发环境配置和应用部署流程。" },
-            { title: "React性能优化策略", content: "探讨提高React应用性能的各种技巧和最佳实践。" },
-            { title: "机器学习算法在代码优化中的应用", content: "如何利用机器学习改进代码质量和执行效率。" },
-            { title: "GraphQL vs REST API", content: "比较两种API设计范式的优缺点及其适用场景。" },
-            { title: "区块链技术在软件开发中的应用", content: "探讨区块链如何改变传统软件开发模式。" },
-            { title: "云原生应用开发指南", content: "介绍开发云原生应用的核心概念和最佳实践。" },
-            { title: "函数式编程范式解析", content: "深入理解函数式编程的核心概念和在现代编程中的应用。" },
-            { title: "微服务架构设计原则", content: "探讨构建可扩展、高可用微服务系统的关键要素。" },
-            { title: "DevOps实践与工具链", content: "介绍实现DevOps的核心实践和常用工具。" },
-            { title: "Web安全最佳实践", content: "探讨保护Web应用免受常见安全威胁的策略和技术。" },
-            { title: "大数据处理框架比较", content: "对比Hadoop、Spark和Flink在大数据处理中的优势。" },
-            { title: "移动应用开发趋势", content: "探讨跨平台开发、PWA和原生应用开发的未来走向。" },
-            { title: "人工智能辅助编程工具", content: "介绍AI如何提高编程效率和代码质量。" },
-            { title: "serverless架构实践", content: "探讨无服务器架构的优势和在实际项目中的应用。" },
-            { title: "代码重构技巧与策略", content: "介绍改善代码质量和可维护性的重构方法。" },
-            { title: "测试驱动开发(TDD)实践", content: "探讨TDD如何提高代码质量和开发效率。" },
-            { title: "前端状态管理方案对比", content: "比较Redux、MobX和Vuex等状态管理库的特点。" },
-            { title: "5G技术对软件开发的影响", content: "探讨5G如何改变软件开发模式和应用场景。" }
+            { title: "Python深度学习框架对比", content: "探讨TensorFlow、PyTorch和Keras的优缺点及适用场景。", link: "python-deep-learning.html" },
+            { title: "JavaScript异步编程技巧", content: "深入理解Promise、async/await和回调函数的使用方法。", link: "javascript-async.html" },
+            { title: "Docker容器化应用实践", content: "如何使用Docker简化开发环境配置和应用部署流程。", link: "docker-containerization.html" },
+            { title: "React性能优化策略", content: "探讨提高React应用性能的各种技巧和最佳实践。", link: "react-performance.html" },
+            { title: "机器学习算法在代码优化中的应用", content: "如何利用机器学习改进代码质量和执行效率。", link: "ml-code-optimization.html" },
+            { title: "GraphQL vs REST API", content: "比较两种API设计范式的优缺点及其适用场景。", link: "graphql-vs-rest.html" },
+            { title: "区块链技术在软件开发中的应用", content: "探讨区块链如何改变传统软件开发模式。", link: "blockchain-in-software-dev.html" },
+            { title: "云原生应用开发指南", content: "介绍开发云原生应用的核心概念和最佳实践。", link: "cloud-native-dev-guide.html" },
+            { title: "函数式编程范式解析", content: "深入理解函数式编程的核心概念和在现代编程中的应用。", link: "functional-programming.html" },
+            { title: "微服务架构设计原则", content: "探讨构建可扩展、高可用微服务系统的关键要素。", link: "microservices-design.html" },
         ];
 
         const searchBox = document.getElementById('search-box');
@@ -249,8 +241,9 @@
         function renderBlogList(posts) {
             blogList.innerHTML = '';
             posts.forEach((post, index) => {
-                const blogItem = document.createElement('div');
+                const blogItem = document.createElement('a');
                 blogItem.className = 'blog-item';
+                blogItem.href = post.link;
                 blogItem.style.animationDelay = `${index * 0.1}s`;
                 blogItem.innerHTML = `
                     <h2>${post.title}</h2>
