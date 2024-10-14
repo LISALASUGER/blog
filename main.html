@@ -3,8 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blogs</title>
+    <title>博客与个人信息</title>
     <style>
+        .info-text {
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 340px;
+        }
+        .info-text h2 {
+            color: #00ffff;
+            margin-bottom: 10px;
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
+        .info-text .title {
+            color: #e0e0e0;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .info-text .divider {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            margin: 0 auto 15px;
+        }
+        .info-text .description,
+        .info-text .mission,
+        .info-text .invitation {
+            color: #b0b0b0;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .info-text .invitation {
+            color: #00ffff;
+            font-weight: bold;
+        }
         body, html {
             margin: 0;
             padding: 0;
@@ -23,107 +57,190 @@
             height: auto;
             z-index: -1;
         }
-        .container {
+        .main-container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             height: 100vh;
             background-color: rgba(0, 0, 0, 0.7);
         }
+        .personal-info {
+            width: 50%;
+            background: rgba(0, 20, 40, 0.8);
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            position: relative;
+        }
+        .personal-info::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.5), transparent);
+        }
+        .content-container {
+            width: 50%;
+            flex-grow: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            overflow-y: auto;
+            background: rgba(0, 10, 30, 0.8);
+        }
+        .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            margin-bottom: 30px;
+        }
         .search-container {
-            margin-top: 20vh;
-            width: 60%;
-            max-width: 600px;
+            width: 80%;
+            max-width: 800px;
+            margin-bottom: 40px;
+            position: relative;
         }
         #search-box {
             width: 100%;
-            font-size: 24px;
-            padding: 15px;
+            font-size: 18px;
+            padding: 15px 20px;
             border: none;
             border-radius: 30px;
             background: rgba(255, 255, 255, 0.1);
             color: #fff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             transition: all 0.3s ease;
         }
         #search-box:focus {
             outline: none;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+        #search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ffff;
+            font-size: 20px;
         }
         #blog-list {
-            margin-top: 40px;
-            width: 80%;
-            max-width: 800px;
-            height: 60vh;
+            width: 90%;
+            max-width: 900px;
+            height: calc(100vh - 200px);
             overflow-y: auto;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 150, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 150, 255, 0.2);
         }
         .blog-item {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.6);
+            margin-bottom: 25px;
+            padding: 25px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(0, 20, 40, 0.6);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         .blog-item:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
         }
         .blog-item h2 {
             margin-top: 0;
-            background-image: linear-gradient(90deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% 100%;
-            animation: gradientMove 5s ease infinite;
+            font-size: 22px;
+            color: #00ffff;
+            margin-bottom: 10px;
         }
         .blog-item p {
-            background-image: linear-gradient(90deg, #ff00ff, #ffff00, #00ffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 300% 100%;
-            animation: gradientMove 8s ease infinite;
-        }
-        @keyframes gradientMove {
-            0% {background-position: 0% 50%;}
-            50% {background-position: 100% 50%;}
-            100% {background-position: 0% 50%;}
+            color: #b0b0b0;
+            font-size: 16px;
+            line-height: 1.6;
         }
         #blog-list::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
         #blog-list::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
         }
         #blog-list::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+        #blog-list::-webkit-scrollbar-thumb:hover {
             background: rgba(0, 255, 255, 0.5);
-            border-radius: 5px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .blog-item {
+            animation: fadeIn 0.5s ease-out;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <video autoplay muted loop id="video-background">
-        <source src="b.mp4" type="video/mp4">
+        <source src="c.mp4" type="video/mp4">
     </video>
 
-    <div class="container">
-        <div class="search-container">
-            <input type="text" id="search-box" placeholder="搜索博客...">
+    <div class="main-container">
+        <div class="personal-info">
+            <img src="1.jpg" alt="头像" class="avatar">
+            <div class="info-text">
+                <h2>LISALA</h2>
+                <p class="title">技术探索者 | 创新分享者</p>
+                <div class="divider"></div>
+                <p class="description">
+                    专注发掘与分享AI、量子计算、区块链等前沿技术的突破与应用。
+                </p>
+                <p class="mission">
+                    致力于将复杂技术转化为易懂内容，激发大众对创新科技的热情。
+                </p>
+                <p class="invitation">
+                    邀您同行，共同探索改变世界的技术奇迹！
+                </p>
+            </div>
         </div>
-        <div id="blog-list"></div>
+        <div class="content-container">
+            <div class="search-container">
+                <input type="text" id="search-box" placeholder="搜索博客...">
+                <i class="fas fa-search" id="search-icon"></i>
+            </div>
+            <div id="blog-list"></div>
+        </div>
     </div>
 
     <script>
         const blogPosts = [
-            { title: "量子计算机革命", content: "探索量子计算如何改变我们的数字世界。" },
-            { title: "人工智能的未来", content: "AI将如何塑造我们的社会和日常生活？" },
-            { title: "太空殖民：人类的下一步", content: "火星殖民和深空探索的可能性。" },
-            { title: "虚拟现实：新的数字前沿", content: "VR技术如何重塑娱乐和教育领域。" },
-            { title: "生物科技：设计生命", content: "基因编辑和合成生物学的伦理挑战。" }
+            { title: "Python深度学习框架对比", content: "探讨TensorFlow、PyTorch和Keras的优缺点及适用场景。" },
+            { title: "JavaScript异步编程技巧", content: "深入理解Promise、async/await和回调函数的使用方法。" },
+            { title: "Docker容器化应用实践", content: "如何使用Docker简化开发环境配置和应用部署流程。" },
+            { title: "React性能优化策略", content: "探讨提高React应用性能的各种技巧和最佳实践。" },
+            { title: "机器学习算法在代码优化中的应用", content: "如何利用机器学习改进代码质量和执行效率。" },
+            { title: "GraphQL vs REST API", content: "比较两种API设计范式的优缺点及其适用场景。" },
+            { title: "区块链技术在软件开发中的应用", content: "探讨区块链如何改变传统软件开发模式。" },
+            { title: "云原生应用开发指南", content: "介绍开发云原生应用的核心概念和最佳实践。" },
+            { title: "函数式编程范式解析", content: "深入理解函数式编程的核心概念和在现代编程中的应用。" },
+            { title: "微服务架构设计原则", content: "探讨构建可扩展、高可用微服务系统的关键要素。" },
+            { title: "DevOps实践与工具链", content: "介绍实现DevOps的核心实践和常用工具。" },
+            { title: "Web安全最佳实践", content: "探讨保护Web应用免受常见安全威胁的策略和技术。" },
+            { title: "大数据处理框架比较", content: "对比Hadoop、Spark和Flink在大数据处理中的优势。" },
+            { title: "移动应用开发趋势", content: "探讨跨平台开发、PWA和原生应用开发的未来走向。" },
+            { title: "人工智能辅助编程工具", content: "介绍AI如何提高编程效率和代码质量。" },
+            { title: "serverless架构实践", content: "探讨无服务器架构的优势和在实际项目中的应用。" },
+            { title: "代码重构技巧与策略", content: "介绍改善代码质量和可维护性的重构方法。" },
+            { title: "测试驱动开发(TDD)实践", content: "探讨TDD如何提高代码质量和开发效率。" },
+            { title: "前端状态管理方案对比", content: "比较Redux、MobX和Vuex等状态管理库的特点。" },
+            { title: "5G技术对软件开发的影响", content: "探讨5G如何改变软件开发模式和应用场景。" }
         ];
 
         const searchBox = document.getElementById('search-box');
@@ -131,9 +248,10 @@
 
         function renderBlogList(posts) {
             blogList.innerHTML = '';
-            posts.forEach(post => {
+            posts.forEach((post, index) => {
                 const blogItem = document.createElement('div');
                 blogItem.className = 'blog-item';
+                blogItem.style.animationDelay = `${index * 0.1}s`;
                 blogItem.innerHTML = `
                     <h2>${post.title}</h2>
                     <p>${post.content}</p>
